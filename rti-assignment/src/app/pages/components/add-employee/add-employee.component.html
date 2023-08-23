@@ -1,0 +1,272 @@
+<app-top-bar [header]="'Add Employee Details'"></app-top-bar>
+<div class="main-container">
+  <h2 class="header">Add Employee</h2>
+  <article>
+    <form
+      #createEmployeeForm="ngForm"
+      [formGroup]="addEmployeeForm"
+      (ngSubmit)="addEmployee()"
+    >
+      <div class="position-relative">
+        <img
+          src="assets/images/person.svg"
+          alt="calendar"
+          class="position-img"
+          style="width: 1.2rem"
+        />
+        <input
+          pInputText
+          type="text"
+          placeholder="Employee Name"
+          formControlName="employeeName"
+          class="input-1"
+          maxlength="200"
+          required="required"
+        />
+      </div>
+      <div
+        *ngIf="
+          addEmployeeForm.get('employeeName')?.invalid &&
+          addEmployeeForm.get('employeeName')?.touched
+        "
+      >
+        <div class="validation-error">Employee name is required.</div>
+      </div>
+      <div style="margin-top: 1rem" class="position-relative">
+        <img
+          src="assets/images/category.svg"
+          alt="calendar"
+          class="position-img"
+        />
+        <p-dropdown
+          [options]="employeeTypes"
+          formControlName="role"
+          placeholder="Select a role"
+          ngDefaultControl
+        ></p-dropdown>
+
+        <ng-template #option let-item>
+          <ng-container [ngSwitch]="item">
+            <span *ngSwitchCase="employeeTypes.Product_Designer">{{
+              employeeTypes.Product_Designer
+            }}</span>
+            <span *ngSwitchCase="employeeTypes.Flutter_Developer">{{
+              employeeTypes.Flutter_Developer
+            }}</span>
+            <span *ngSwitchCase="employeeTypes.Angular_Developer">{{
+              employeeTypes.Angular_Developer
+            }}</span>
+            <span *ngSwitchCase="employeeTypes.Tester">{{
+              employeeTypes.Tester
+            }}</span>
+          </ng-container>
+        </ng-template>
+        <img
+          src="assets/images/down-arrow.svg"
+          alt="calendar"
+          class="down-arrow cursor-pointer"
+        />
+      </div>
+      <div
+        *ngIf="
+          addEmployeeForm.get('role')?.invalid &&
+          addEmployeeForm.get('role')?.touched
+        "
+      >
+        <div class="validation-error">Role is required.</div>
+      </div>
+      <div class="date-main-container">
+        <div>
+          <div class="position-relative">
+            <img
+              src="assets/images/calendar.svg"
+              alt="calendar"
+              class="position-img"
+            />
+            <p-calendar
+              #fromDateCalendar
+              formControlName="fromDate"
+              placeholder="Start Date"
+              dateFormat="dd/mm/yy"
+              [showButtonBar]="false"
+              (onSelect)="endDateGreaterThanStartDateValidator()"
+              ngDefaultControl
+            >
+              <ng-template pTemplate="header">
+                <div class="custom-calendar-header">
+                  <div>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="goToTodayForStartDate()"
+                    >
+                      Today
+                    </button>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="goToNextDay(1)"
+                    >
+                      Next Monday
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="goToNextDay(2)"
+                    >
+                      Next Tuesday
+                    </button>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="goToNextWeek()"
+                    >
+                      After 1 Week
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="footer">
+                <div class="custom-calendar-footer">
+                  <div class="selected-date">
+                    <img
+                      src="assets/images/calendar.svg"
+                      alt="calendar"
+                      class="position-img"
+                      style="bottom: 1rem"
+                    />
+                    <span class="me-2">{{
+                      selectedStartDate | date : "d MMM y"
+                    }}</span>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="cancel-btn cursor-pointer"
+                      (click)="cancelForStartDate()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="save-btn cursor-pointer"
+                      (click)="saveStartDate()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </ng-template></p-calendar
+            >
+          </div>
+          <div
+            *ngIf="
+              addEmployeeForm['controls']['fromDate']['touched'] &&
+              addEmployeeForm['controls']['fromDate']['errors'] &&
+              addEmployeeForm['controls']['fromDate']['errors']['required']
+            "
+            class="validation-error"
+          >
+            Start date is required
+          </div>
+          <div
+            *ngIf="
+              addEmployeeForm.get('fromDate')?.invalid &&
+              addEmployeeForm.get('fromDate')?.dirty
+            "
+            class="validation-error"
+          >
+            End date must be greater than start date
+          </div>
+        </div>
+        <img src="assets/images/arrow.svg" alt="arrow" class="me-1" />
+        <div>
+          <div class="position-relative me-1">
+            <img
+              src="assets/images/calendar.svg"
+              alt="calendar"
+              class="position-img"
+            />
+            <p-calendar
+              #toDateCalendar
+              formControlName="toDate"
+              placeholder="End Date"
+              dateFormat="dd/mm/yy"
+              ngDefaultControl
+              [showButtonBar]="false"
+              (onSelect)="endDateGreaterThanStartDateValidator()"
+            >
+              <ng-template pTemplate="header">
+                <div class="custom-calendar-header">
+                  <div>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="noDate()"
+                    >
+                      No Date
+                    </button>
+                    <button
+                      type="button"
+                      class="btn cursor-pointer"
+                      (click)="goToTodayForEndDate()"
+                    >
+                      Today
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="footer">
+                <div class="custom-calendar-footer">
+                  <div class="selected-date">
+                    <img
+                      src="assets/images/calendar.svg"
+                      alt="calendar"
+                      class="position-img"
+                      style="bottom: 1rem"
+                    />
+                    <span class="me-2">{{
+                      selectedEndDate | date : "d MMM y"
+                    }}</span>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="cancel-btn cursor-pointer"
+                      (click)="cancelForEndDate()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="save-btn cursor-pointer"
+                      (click)="saveEndDate()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+      <div class="btn-container">
+        <button class="cancel-btn cursor-pointer" (click)="cancel()">
+          Cancel
+        </button>
+        <button
+          class="save-btn cursor-pointer"
+          [disabled]="!addEmployeeForm.valid"
+          [ngClass]="{ 'invalid-btn': !addEmployeeForm.valid }"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </article>
+</div>

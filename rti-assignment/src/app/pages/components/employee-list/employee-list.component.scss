@@ -1,0 +1,71 @@
+@import "./../../../../variables";
+
+.main-container {
+  height: 93%;
+  overflow-y: auto;
+}
+
+.employee-header {
+  height: 3rem;
+  background: $background-color;
+  display: flex;
+  align-items: center;
+
+  .employee-header-text {
+    font-size: 18px;
+    color: $blue-color;
+  }
+}
+.btn-container {
+  height: 70px;
+  width: 100%;
+  background-color: $background-color;
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+  z-index: 10;
+}
+
+.btn-img {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 3rem;
+}
+
+.no-records {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.employee-detail-container {
+  background: $white-color;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-btn {
+  padding-right: 4.2rem;
+}
+
+.employee-detail {
+  padding: 1rem 0;
+  gap: 0.5rem;
+}
+
+.padding-left {
+  padding-left: 3rem;
+}
+
+.employe-name {
+  font-size: 1.2rem;
+  color: $blue-color;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .btn-container {
+    right: 0rem;
+  }
+}

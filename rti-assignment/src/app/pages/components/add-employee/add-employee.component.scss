@@ -1,0 +1,68 @@
+@import "./../../../../variables";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  article {
+    width: 80%;
+    height: 20rem;
+    background-color: $white-color;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .header {
+    height: 3rem;
+    color: $blue-color;
+  }
+
+  .input-1 {
+    height: 3rem;
+    width: 20rem;
+    padding-left: 2.5rem;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+  }
+
+  .date-main-container {
+    display: flex;
+    margin-top: 1rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .position-relative {
+    position: relative;
+  }
+
+  .position-img {
+    position: absolute;
+    bottom: 0.8rem;
+    left: 0.5rem;
+    z-index: 1;
+  }
+
+  .btn-container {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .down-arrow {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 17.9rem;
+    width: 12px;
+  }
+
+  .selected-date {
+    display: flex;
+    align-items: center;
+  }
+}

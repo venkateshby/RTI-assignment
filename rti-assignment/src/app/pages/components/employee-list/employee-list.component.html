@@ -1,0 +1,96 @@
+<app-top-bar [header]="'Employee List'"></app-top-bar>
+<div class="main-container">
+  <div
+    *ngIf="(employees$ | async)?.length; else noEmployees"
+    style="margin-bottom: 4.5rem"
+  >
+    <div class="employee-header">
+      <span class="employee-header-text padding-left">Current Employees</span>
+    </div>
+    <div
+      *ngFor="let employee of employees$ | async"
+      class="employee-detail-container padding-left"
+    >
+      <ng-container *ngIf="!employee.employeeEndDate">
+        <div class="employee-detail d-flex flex-column">
+          <a
+            href=""
+            [routerLink]="['edit-employee', employee.id]"
+            class="employe-name"
+            >{{ employee.employeeName }}</a
+          >
+          <span class="text-color">{{ employee.role }}</span>
+          <div>
+            <span class="text-color">{{ employee.employeeStartDate }}</span>
+          </div>
+        </div>
+        <img
+          src="/assets/images/delete.svg"
+          alt="delete"
+          class="cursor-pointer delete-btn"
+          (click)="showDeleteDialog(employee.id)"
+        />
+      </ng-container>
+    </div>
+    <div class="employee-header">
+      <span class="employee-header-text padding-left">Previous Employees</span>
+    </div>
+    <div
+      *ngFor="let employee of employees$ | async"
+      class="employee-detail-container padding-left"
+    >
+      <ng-container *ngIf="employee.employeeEndDate">
+        <div class="employee-detail d-flex flex-column">
+          <a
+            href=""
+            [routerLink]="['edit-employee', employee.id]"
+            class="employe-name"
+            >{{ employee.employeeName }}</a
+          >
+          <span class="text-color">{{ employee.role }}</span>
+          <div>
+            <span class="text-color">{{ employee.employeeStartDate }}</span> -
+            <span class="text-color">{{ employee.employeeEndDate }}</span>
+          </div>
+        </div>
+        <img
+          src="/assets/images/delete.svg"
+          alt="delete"
+          class="cursor-pointer delete-btn"
+          (click)="showDeleteDialog(employee.id)"
+        />
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template #noEmployees>
+    <div class="no-records">
+      <img src="assets/images/no_records.svg" alt="" />
+    </div>
+  </ng-template>
+  <div class="btn-container">
+    <img
+      src="assets/images/add_btn.svg"
+      alt="add-button"
+      [routerLink]="['/employee/add-employee']"
+      class="cursor-pointer btn-img"
+    />
+  </div>
+</div>
+<p-dialog
+  header="{{ 'Delete Employee' }}"
+  [(visible)]="showDialog"
+  [style]="{ width: '32vw' }"
+  [draggable]="false"
+  [modal]="true"
+>
+  <div class="d-flex flex-column">
+    <span class="mb-3">Are you sure you want to delete this record</span>
+    <div class="d-flex justify-content-evenly pt-1">
+      <button pButton class="dialog-btn" (click)="confirmDelete()">Yes</button>
+      <button pButton class="dialog-btn" (click)="this.showDialog = false">
+        No
+      </button>
+    </div>
+  </div>
+</p-dialog>

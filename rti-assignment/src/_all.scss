@@ -1,0 +1,248 @@
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+.text-color {
+  color: $text-color;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.me-1 {
+  margin-left: 1rem;
+}
+
+.me-2 {
+  margin-left: 2rem;
+}
+
+.pt-1 {
+  padding-top: 1rem;
+}
+
+.dialog-btn {
+  width: 6.5rem;
+  background: $blue-light !important;
+  color: $blue-color !important;
+  display: flex;
+  justify-content: center;
+
+  &:focus {
+    background: $blue-color;
+    color: $white-color;
+  }
+}
+
+.p-dropdown {
+  background: $white-color;
+  border-radius: 30px;
+  height: 3rem;
+  width: 20rem;
+  border-color: $border-color;
+  .p-dropdown-label {
+    padding-left: 2.5rem;
+  }
+
+  .p-dropdown-trigger {
+    z-index: 10;
+    opacity: 0;
+  }
+}
+
+.p-calendar .p-inputtext {
+  height: 3rem;
+  width: 20rem !important;
+  padding-left: 2.5rem;
+  &::-webkit-input-placeholder {
+    color: #737373;
+  }
+}
+
+.save-btn {
+  width: 5rem;
+  background: $blue-color;
+  color: $white-color;
+  padding: 0.8rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancel-btn {
+  width: 5rem;
+  background: $blue-light;
+  color: $blue-color;
+  padding: 0.8rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 9.5rem;
+  background: $blue-light;
+  color: $blue-color;
+  padding: 0.8rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 5px;
+
+  &:focus {
+    background: $blue-color;
+    color: $white-color;
+  }
+}
+
+.validation-error {
+  color: $red-color;
+  margin: 0.5rem 0rem;
+}
+
+.p-button {
+  background: transparent;
+  border: none;
+}
+.p-button.p-button-icon-only {
+  position: relative;
+  right: 3rem;
+}
+.p-datepicker:not(.p-datepicker-inline) {
+  background: transparent;
+  border: none;
+}
+.p-datepicker table td > span.p-highlight,
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight,
+.p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight,
+.p-datepicker table td.p-datepicker-today > span.p-highlight {
+  color: $white-color !important;
+  background: $blue-color !important;
+}
+.p-datepicker table td > span.p-highlight,
+.p-datepicker table td.p-datepicker-today > span.p-highlight {
+  padding: 16px;
+}
+.p-datepicker table td.p-datepicker-today > span {
+  background: $white-color !important;
+  border: 1px solid $blue-color !important;
+  padding: 16px;
+}
+
+.p-datepicker table {
+  background: $white-color;
+  margin: 0;
+  color: $black-color;
+  border-collapse: separate;
+}
+.p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+  width: 14rem;
+  margin: auto;
+  border-bottom: none;
+}
+.p-datepicker-group-container {
+  width: 22rem;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
+.p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next,
+.p-datepicker-decade {
+  color: $black-color;
+}
+.p-datepicker .p-monthpicker,
+.p-datepicker .p-yearpicker {
+  margin: 0;
+  background: $white-color;
+  color: $black-color;
+  border: 1px solid $border-color;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.p-button:enabled:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+table {
+  th {
+    > span {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+    }
+  }
+
+  td {
+    > span {
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+    }
+  }
+}
+
+.p-datepicker .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus,
+.p-datepicker .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus,
+.p-datepicker table td.p-datepicker-today > span:not(.p-disabled):focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.custom-calendar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0.3rem 0;
+}
+
+.custom-calendar-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invalid-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}
+
+@media (max-width: 1024px) {
+  .input-1 {
+    width: 14rem !important;
+  }
+
+  .p-dropdown {
+    width: 14rem !important;
+  }
+
+  .p-calendar .p-inputtext {
+    width: 14rem !important;
+  }
+
+  .input-1 {
+    width: 14rem !important;
+  }
+
+  .down-arrow {
+    left: 11.9rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .p-calendar .p-inputtext {
+    width: 8.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  article {
+    width: 95% !important;
+    padding: 0.3rem !important;
+  }
+}
