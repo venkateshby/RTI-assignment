@@ -28,7 +28,6 @@ export class EmployeeListComponent implements OnInit {
       .listEmployees()
       .then((employees) => {
         this.employees$.next(employees);
-        // Do whatever you want with the list of employees
       })
       .catch((error) => {
         console.error('Error listing employees:', error);
@@ -40,7 +39,7 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService
       .delete(this.employeeId)
       .then(() => {
-        this.loadEmployees(); // Refresh the list of employees
+        this.loadEmployees();
       })
       .catch((error) => {
         console.error('Error deleting employee:', error);

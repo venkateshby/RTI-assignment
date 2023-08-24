@@ -45,7 +45,7 @@ export class EmployeeService {
       return new Promise<void>((resolve) => {
         setTimeout(() => {
           this.ensureDBReady().then(() => resolve());
-        }, 100); // Adjust the delay as needed
+        }, 100);
       });
     }
   }
