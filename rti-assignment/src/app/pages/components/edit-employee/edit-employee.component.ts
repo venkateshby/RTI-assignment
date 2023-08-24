@@ -129,14 +129,48 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   endDateGreaterThanStartDateValidator() {
+    let formattedStartDate: Date;
+    let formattedEndDate: Date;
     const startDate = this.editEmployeeForm.get('fromDate');
     const endDate = this.editEmployeeForm.get('toDate')?.value;
     this.selectedStartDate = startDate?.value;
     this.selectedEndDate = endDate;
+    if (typeof startDate?.value === 'object') {
+      formattedStartDate = new Date(
+        this.datePipe.transform(startDate?.value, 'yyyy-MM-dd')!
+      );
+    } else {
+      const startDateParts = startDate?.value.split('/');
+      formattedStartDate = new Date(
+        parseInt(startDateParts[2]),
+        parseInt(startDateParts[1]) - 1,
+        parseInt(startDateParts[0])
+      );
+    }
+    if (typeof endDate === 'object') {
+      formattedEndDate = new Date(
+        this.datePipe.transform(endDate, 'yyyy-MM-dd')!
+      );
+    } else {
+      const endDateParts = endDate.split('/');
+      formattedEndDate = new Date(
+        parseInt(endDateParts[2]),
+        parseInt(endDateParts[1]) - 1,
+        parseInt(endDateParts[0])
+      );
+    }
 
-    if (startDate?.value && endDate && startDate?.value > endDate) {
+    if (
+      formattedStartDate &&
+      formattedEndDate &&
+      formattedStartDate > formattedEndDate
+    ) {
       startDate?.setErrors({ pattern: true });
-    } else if (startDate?.value && endDate && startDate?.value <= endDate) {
+    } else if (
+      startDate &&
+      formattedEndDate &&
+      formattedStartDate <= formattedEndDate
+    ) {
       if (startDate.errors && startDate.errors?.['pattern']) {
         const errors = { ...startDate.errors };
         delete errors?.['pattern'];
@@ -158,6 +192,7 @@ export class EditEmployeeComponent implements OnInit {
       const { fromDate, toDate, ...formValues }: any = {
         ...this.editEmployeeForm.value,
       };
+
       if (typeof fromDate === 'string') {
         const startDate = this.parseDate(fromDate);
         employeeStartDate = this.datePipe.transform(startDate, 'd MMM, y');
@@ -166,8 +201,8 @@ export class EditEmployeeComponent implements OnInit {
       }
 
       if (toDate) {
-        if (typeof fromDate === 'string') {
-          const endDate = this.parseDate(fromDate);
+        if (typeof toDate === 'string') {
+          const endDate = this.parseDate(toDate);
           employeeEndDate = this.datePipe.transform(endDate, 'd MMM, y');
         } else {
           employeeEndDate = this.datePipe.transform(toDate, 'd MMM, y');

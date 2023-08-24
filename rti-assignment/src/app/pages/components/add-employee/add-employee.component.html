@@ -4,6 +4,7 @@
   <article>
     <form
       #createEmployeeForm="ngForm"
+      id="ngform"
       [formGroup]="addEmployeeForm"
       (ngSubmit)="addEmployee()"
     >
@@ -173,15 +174,6 @@
           >
             Start date is required
           </div>
-          <div
-            *ngIf="
-              addEmployeeForm.get('fromDate')?.invalid &&
-              addEmployeeForm.get('fromDate')?.dirty
-            "
-            class="validation-error"
-          >
-            End date must be greater than start date
-          </div>
         </div>
         <img src="assets/images/arrow.svg" alt="arrow" class="me-1" />
         <div>
@@ -257,11 +249,23 @@
           </div>
         </div>
       </div>
+      <div
+        *ngIf="
+          addEmployeeForm.get('fromDate')?.invalid &&
+          addEmployeeForm.get('fromDate')?.dirty
+        "
+        class="validation-error"
+      >
+        End date must be greater than start date
+      </div>
       <div class="btn-container">
         <button class="cancel-btn cursor-pointer" (click)="cancel()">
           Cancel
         </button>
         <button
+          type="submit"
+          form="ngform"
+          value="Save"
           class="save-btn cursor-pointer"
           [disabled]="!addEmployeeForm.valid"
           [ngClass]="{ 'invalid-btn': !addEmployeeForm.valid }"

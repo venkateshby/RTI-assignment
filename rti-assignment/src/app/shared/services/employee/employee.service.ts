@@ -115,11 +115,12 @@ export class EmployeeService {
 
     const transaction = this.db!.transaction([this.storeName], 'readwrite');
     const store = transaction.objectStore(this.storeName);
-    const request = store.put(data); // Using put to update the existing record
+    const request = store.put(data);
 
     return new Promise<void>((resolve, reject) => {
-      request.onsuccess = () => {
-        resolve();
+      request.onsuccess = (event) => {
+        const updatedId = (event.target as any).result;
+        resolve(updatedId);
       };
 
       request.onerror = () => {

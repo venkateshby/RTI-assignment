@@ -4,6 +4,7 @@
   <article>
     <form
       #updateEmployeeForm="ngForm"
+      id="ngform"
       [formGroup]="editEmployeeForm"
       (ngSubmit)="editEmployee()"
     >
@@ -173,15 +174,6 @@
           >
             Start date is required
           </div>
-          <div
-            *ngIf="
-              editEmployeeForm.get('fromDate')?.invalid &&
-              editEmployeeForm.get('fromDate')?.dirty
-            "
-            class="validation-error"
-          >
-            End date must be greater than start date
-          </div>
         </div>
         <img src="assets/images/arrow.svg" alt="arrow" class="me-1" />
         <div>
@@ -257,6 +249,12 @@
           </div>
         </div>
       </div>
+      <div
+        *ngIf="editEmployeeForm.get('fromDate')?.invalid"
+        class="validation-error"
+      >
+        End date must be greater than start date
+      </div>
       <div class="btn-container">
         <button
           type="button"
@@ -266,6 +264,9 @@
           Cancel
         </button>
         <button
+          type="submit"
+          form="ngform"
+          value="Save"
           class="save-btn cursor-pointer"
           [disabled]="!editEmployeeForm.valid"
           [ngClass]="{ 'invalid-btn': !editEmployeeForm.valid }"
