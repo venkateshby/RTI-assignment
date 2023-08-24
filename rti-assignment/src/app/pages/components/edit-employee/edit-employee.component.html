@@ -89,6 +89,7 @@
               placeholder="Start Date"
               dateFormat="dd/mm/yy"
               [showButtonBar]="false"
+              [touchUI]="isMobile"
               (onSelect)="endDateGreaterThanStartDateValidator()"
               ngDefaultControl
             >
@@ -196,6 +197,7 @@
               placeholder="End Date"
               dateFormat="dd/mm/yy"
               [showButtonBar]="false"
+              [touchUI]="isMobile"
               (onSelect)="endDateGreaterThanStartDateValidator()"
               ngDefaultControl
             >

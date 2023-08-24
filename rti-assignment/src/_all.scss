@@ -129,12 +129,14 @@
 }
 .p-datepicker table td > span.p-highlight,
 .p-datepicker table td.p-datepicker-today > span.p-highlight {
-  padding: 16px;
+  padding: 16px 18px;
+  margin: 2px auto;
 }
 .p-datepicker table td.p-datepicker-today > span {
   background: $white-color !important;
   border: 1px solid $blue-color !important;
-  padding: 16px;
+  padding: 16px 18px;
+  margin: 2px auto;
 }
 
 .p-datepicker table {
@@ -183,7 +185,7 @@ table {
   td {
     > span {
       width: 1.5rem !important;
-      height: 1.5rem !important;
+      height: 2.5rem !important;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calendar } from 'primeng/calendar';
@@ -14,13 +14,16 @@ import { EmployeeType } from '../add-employee/add-employee.component';
 export class EditEmployeeComponent implements OnInit {
   editEmployeeForm: FormGroup;
   employeeTypes: any = Object.values(EmployeeType);
-  maxDate = new Date();
-  minDate = new Date();
   selectedStartDate: Date | null = null;
   selectedEndDate: Date | null = null;
   employeeId: string | null = '';
+  isMobile = false;
   @ViewChild('toDateCalendar') toDateCalendar: Calendar;
   @ViewChild('fromDateCalendar') fromDateCalendar: Calendar;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.checkIsMobile();
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -28,10 +31,7 @@ export class EditEmployeeComponent implements OnInit {
     private datePipe: DatePipe,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    this.maxDate.setDate(this.maxDate.getDate());
-    this.minDate.setDate(this.minDate.getDate());
-  }
+  ) {}
 
   ngOnInit(): void {
     this.editEmployeeForm = this.fb.group({
@@ -66,6 +66,14 @@ export class EditEmployeeComponent implements OnInit {
     } else {
       this.router.navigate(['/employee']);
     }
+    this.checkIsMobile();
+  }
+
+  checkIsMobile(): void {
+    if (this.toDateCalendar) {
+      this.toDateCalendar.overlayVisible = false;
+    }
+    this.isMobile = window.innerWidth <= 480;
   }
 
   goToTodayForStartDate(): void {
